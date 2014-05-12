@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+<div class="container">
+    <h1>WEBCOOM</h1>
+    <p>
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">@</span>
+      <input type="text" class="form-control" name="code" id="code" placeholder="Entrer votre code">
+      <span class="input-group-addon" id="date"></span>  
+    </div>
+    </p>
+    <p>
+    <div class="col-sm-4">
+        <button type="button" class="btn btn-lg btn-default" onclick="r('7')">7</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('8')">8</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('9')">9</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('4')">4</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('5')">5</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('6')">6</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('1')">1</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('2')">2</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('3')">3</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('0')">0</button>
+    </div>
+    <div class="col-sm-8">
+        <button type="button" class="btn btn-lg btn-default" onclick="r('A')">A</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('Z')">Z</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('E')">E</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('R')">R</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('T')">T</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('Y')">Y</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('U')">U</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('I')">I</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('O')">O</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('P')">P</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('Q')">Q</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('S')">S</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('D')">D</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('F')">F</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('G')">G</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('H')">H</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('J')">J</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('K')">K</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('L')">L</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('M')">M</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('W')">W</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('X')">X</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('C')">C</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('V')">V</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('B')">B</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="r('N')">N</button>
+        
+    </div>
+    </p>
+    <p>
+        <button type="button" class="btn btn-lg btn-success" onclick="entree()">ENTREE</button>
+        <button type="button" class="btn btn-lg btn-default" onclick="e()">EFFACER</button>
+        <button type="button" class="btn btn-lg btn-danger" onclick="sortie()">SORTIE</button>
+    </p>
+    <p>&copy; WEBCOOM R&D 2014</p>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/moment.js"></script>
+    <script>
+        function salert() {alert("kljlkjl")};
+        
+        function r(r) { 
+                oval = $('#code').val();
+            
+            $('#code').val(oval+r)};
+        
+        function e() { 
+            $('#code').val('')};
+        
+        function dnow() {
+            moment.lang('fr');
+            var now = moment().format("dddd  Do MMMM  YYYY, H:mm:ss ");
+             // Saturday, June 9th, 2007, 5:46:21 PM
+            $('#date').html(now);};
+        dnow();
+        setInterval(dnow,1000);
+        
+        function entree() {
+            var code= $('#code').val(),
+                temps = $('#date').html();
+            
+            $.ajax({
+              type: "POST",
+              url: "http://10.41.14.254/api/index.php/pointage/entree/"+code,
+                success: function(){ alert('Entré de '+code+' / '+temps)},
+            });
+           
+        };
+        
+        function sortie() {
+            var code= $('#code').val(),
+                temps = $('#date').html();
+            
+             $.ajax({
+              type: "POST",
+              url: "http://10.41.14.254/api/index.php/pointage/sortie/"+code,
+                success: function(){ alert('Entré de '+code+' / '+temps)},
+            });
+           
+};
+
+    </script>
+
+  </body>
+</html>
